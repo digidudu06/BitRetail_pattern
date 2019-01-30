@@ -1,0 +1,19 @@
+package service;
+
+import java.util.List;
+
+import domain.EmployeeDTO;
+
+public interface EmployeeService {
+	public void registEmployee(EmployeeDTO emp);
+	
+	public List<EmployeeDTO> bringEmplyoeeList();
+	public List<EmployeeDTO> retrieveEmplyoees(String searchWord);
+	public EmployeeDTO retrieveEmployee(String searchWord);
+	public int countEmployees();
+	public boolean existsEmployee(String searchWord);
+	
+	public void modifyEmployee(EmployeeDTO emp);
+	
+	public void removeEmployee(EmployeeDTO emp);
+}
