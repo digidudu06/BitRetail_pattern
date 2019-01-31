@@ -1,8 +1,12 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import domain.EmployeeDTO;
+import enums.EmployeeSQL;
+import enums.Vendor;
 import factory.DatabaseFactory;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -12,8 +16,22 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public void inserEmployee(EmployeeDTO emp) {
-//		DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeUpdate();
-		
+		try {
+			/* 입력 순서 MANAGER,NAME,BIRTH_DATE,PHOTO,NOTES*/
+			String sql = EmployeeSQL.REGISTER.toString();
+			System.out.println("실행할 쿼리 ::"+sql);
+			Connection conn = DatabaseFactory.creataDatabase(Vendor.ORACLE).getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, emp.getManager());
+			pstmt.setString(2, emp.getName());
+			pstmt.setString(3, emp.getBirthDate());
+			pstmt.setString(4, emp.getPhoto());
+			pstmt.setString(5, emp.getNotes());
+			int rs = pstmt.executeUpdate();
+			System.out.println((rs==1)?"성공":"실패");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
