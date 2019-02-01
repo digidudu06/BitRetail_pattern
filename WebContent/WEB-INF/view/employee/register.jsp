@@ -28,7 +28,7 @@
 <jsp:include page="../home/bottom.jsp"/>
 <script>
 $('#confirm_btn').click(function(){
-	var poto = $('#poto').val();
+	var photo = $('#photo').val();
 	var name = $('#name').val();
 	var manager = $('#manager').val();
 	var birthday = $('#birthday').val();
