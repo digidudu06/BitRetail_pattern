@@ -1,7 +1,11 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import domain.EmployeeDTO;
@@ -11,17 +15,22 @@ import factory.DatabaseFactory;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
 	private static EmployeeDAOImpl instance = new EmployeeDAOImpl();
-	public EmployeeDAOImpl() {}
+	public EmployeeDAOImpl() {
+		pstmt = null;
+	}
 	public static EmployeeDAOImpl getInstance() {return instance;}
-
+	PreparedStatement pstmt;
+	
 	@Override
-	public void inserEmployee(EmployeeDTO emp) {
+	public void insertEmployee(EmployeeDTO emp) {
 		try {
 			/* 입력 순서 MANAGER,NAME,BIRTH_DATE,PHOTO,NOTES*/
 			String sql = EmployeeSQL.REGISTER.toString();
 			System.out.println("실행할 쿼리 ::"+sql);
-			Connection conn = DatabaseFactory.creataDatabase(Vendor.ORACLE).getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt = DatabaseFactory
+					.creataDatabase(Vendor.ORACLE)
+					.getConnection()
+					.prepareStatement(sql);
 			pstmt.setString(1, emp.getManager());
 			pstmt.setString(2, emp.getName());
 			pstmt.setString(3, emp.getBirthDate());
@@ -36,32 +45,97 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public List<EmployeeDTO> selectEmplyoeeList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<EmployeeDTO> list = new ArrayList<>();
+		try {
+			String sql = "";
+			pstmt = DatabaseFactory
+			.creataDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			pstmt.setString(1, "");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
 	public List<EmployeeDTO> selectEmplyoees(String searchWord) {
-		// TODO Auto-generated method stub
-		return null;
+		List<EmployeeDTO> list = new ArrayList<>();
+		try {
+			String sql = "";
+			pstmt = DatabaseFactory
+					.creataDatabase(Vendor.ORACLE)
+					.getConnection()
+					.prepareStatement(sql);
+			pstmt.setString(1, "");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
 	public EmployeeDTO selectEmployee(String searchWord) {
-		// TODO Auto-generated method stub
-		return null;
+		EmployeeDTO emp = new EmployeeDTO();
+		try {
+			String sql = "";
+			pstmt = DatabaseFactory
+					.creataDatabase(Vendor.ORACLE)
+					.getConnection()
+					.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return emp;
 	}
 
 	@Override
 	public int countEmployees() {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		try {
+			String sql = "";
+			pstmt = DatabaseFactory
+			.creataDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override
-	public boolean existsEmployee(String searchWord) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existsEmployee(EmployeeDTO emp) {
+		boolean ok = false;
+		try {
+			pstmt = DatabaseFactory
+					.creataDatabase(Vendor.ORACLE)
+					.getConnection()
+					.prepareStatement(EmployeeSQL.ACCESS.toString());
+			System.out.println("아이디 : "+emp.getEmploueeId()+" 이름 : "+emp.getName());
+			pstmt.setString(1, emp.getEmploueeId());
+			pstmt.setString(2, emp.getName());
+			if(pstmt.executeQuery().next()) {ok = true;}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("접근허용 "+ok);
+		return ok;
 	}
 
 	@Override

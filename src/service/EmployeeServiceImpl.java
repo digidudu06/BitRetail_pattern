@@ -14,7 +14,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public void registEmployee(EmployeeDTO emp) {
-		dao.inserEmployee(emp);
+		dao.insertEmployee(emp);
 	}
 
 	@Override
@@ -38,8 +38,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public boolean existsEmployee(String searchWord) {
-		return false;
+	public boolean existsEmployee(EmployeeDTO emp) {
+		boolean ok = false;
+		ok = dao.existsEmployee(emp);
+		return ok;
 	}
 
 	@Override

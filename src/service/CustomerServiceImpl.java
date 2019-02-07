@@ -2,18 +2,19 @@ package service;
 
 import java.util.List;
 
+import dao.CustomerDAO;
+import dao.CustomerDAOImpl;
 import domain.CustomerDTO;
 
 public class CustomerServiceImpl implements CustomerService {
 	private static CustomerServiceImpl instance = new CustomerServiceImpl();
-	public CustomerServiceImpl() {}
+	public CustomerServiceImpl() {dao = new CustomerDAOImpl();}
 	public static CustomerServiceImpl getInstance() {return instance;}
-
+	private CustomerDAO dao;
 
 	@Override
 	public void joinCustomer(CustomerDTO cus) {
-		// TODO Auto-generated method stub
-		
+		dao.insertCustomer(cus);
 	}
 
 	@Override

@@ -24,18 +24,6 @@ public class EmployeeController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("----------1. 컨트롤러 진입-----------");
 		Receiver.init(request, response);
-		switch (Action.valueOf(Receiver
-				.cmd
-				.getAction()
-				.toUpperCase())) {
-		case MOVE:
-			System.out.println("무브 진입");
-			Carrier.forward(request, response);
-			break;
-		case REGISTER:
-			System.out.println("레지스터 진입");
-			Carrier.forward(request, response);
-			break;
-		}
+		Carrier.forward(request, response);
 	}
 }
