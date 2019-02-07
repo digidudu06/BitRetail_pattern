@@ -8,7 +8,7 @@ import domain.EmployeeDTO;
 
 public class EmployeeServiceImpl implements EmployeeService {
 	private static EmployeeServiceImpl instance = new EmployeeServiceImpl();
-	public EmployeeServiceImpl() {dao = new EmployeeDAOImpl();}
+	public EmployeeServiceImpl() {dao = new EmployeeDAOImpl().getInstance();}
 	public static EmployeeServiceImpl getInstance() {return instance;}
 	private EmployeeDAO dao;
 

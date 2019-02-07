@@ -8,7 +8,7 @@ import domain.CustomerDTO;
 
 public class CustomerServiceImpl implements CustomerService {
 	private static CustomerServiceImpl instance = new CustomerServiceImpl();
-	public CustomerServiceImpl() {dao = new CustomerDAOImpl();}
+	public CustomerServiceImpl() {dao = new CustomerDAOImpl().getInstance();}
 	public static CustomerServiceImpl getInstance() {return instance;}
 	private CustomerDAO dao;
 
