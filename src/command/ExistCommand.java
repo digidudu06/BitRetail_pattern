@@ -2,6 +2,7 @@ package command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import domain.CustomerDTO;
 import domain.EmployeeDTO;
@@ -12,6 +13,7 @@ import service.EmployeeServiceImpl;
 public class ExistCommand extends Command {
 	public ExistCommand(HttpServletRequest request, HttpServletResponse response) {
 		super(request,response);
+		HttpSession session = request.getSession();
 		System.out.println("----- 익지스트 커맨드 접근--------");
 		switch(Action.valueOf(request.getParameter("cmd").toUpperCase())) {
 		case ACCESS:
@@ -33,9 +35,10 @@ public class ExistCommand extends Command {
 			System.out.println(request.getParameter("customerId")+request.getParameter("password"));
 			cus.setCustomerId(request.getParameter("customerId"));
 			cus.setPassword(request.getParameter("password"));
-			boolean exist1 = CustomerServiceImpl.getInstance().existsCustomer(cus);
-			if(exist1) {
+			cus = CustomerServiceImpl.getInstance().retrieveCustomer(cus);
+			if(cus != null) {
 				System.out.println("SIGN접속성공");
+				session.setAttribute("customer", cus);
 			}else {
 				System.out.println("SIGN접속실패");
 				super.setDomain("home");

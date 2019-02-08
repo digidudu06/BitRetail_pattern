@@ -10,9 +10,9 @@ public interface CustomerService {
 	
 	public List<CustomerDTO> bringCustomerLists();
 	public List<CustomerDTO> retrieveCustomers(String City);
-	public CustomerDTO retrieveCustomer(String CustomerId);
+	public CustomerDTO retrieveCustomer(CustomerDTO cus);
 	public int countCustomer();
-	public boolean existsCustomer(CustomerDTO cus);
+	public boolean existsCustomerId(CustomerDTO cus);
 	
 	public void modifyCustomer(CustomerDTO cus);
 	

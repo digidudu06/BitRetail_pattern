@@ -7,18 +7,28 @@
 </div>
 <div class="grid-item" id="content">
 <form id="form" name="form" >
-	<div class="grid-container">
-	<!-- customerId, customerName, password, address, city, postalCode, ssn -->
-	    <div class="grid-item" id="item_1">아이디</div>
-	    <div class="grid-item" id="item_2"><input type="text" id="customerId" name="customerId" value="anat12"></div>
-	    <div class="grid-item" id="item_3">비밀번호</div>
-	    <div class="grid-item" id="item_4"><input type="text" id="password" name="password" value="123" ></div>
-	    <div class="grid-item" id="item_11"><input type="submit" id="confirm_btn" value='확 인'></div>
-	    <div class="grid-item" id="item_12"><input type="reset" id="cancel_btn" value='취 소'> </div>
+		<div class="input-group">
+			<span class="input-group-addon" id="basic-addon1">아이디</span> 
+			<input type="text" id="customerId" name="customerId"
+				class="form-control" placeholder="Username"
+				aria-describedby="basic-addon1">
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" id="basic-addon1">비밀번호</span> 
+			<input type="text" id="password" name="password"
+				class="form-control" placeholder="Username"
+				aria-describedby="basic-addon1">
+		</div>
+		<button type="button" class="btn btn-default btn-lg"  id="cancel_btn" value="CANCEL">
+			<span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ></span> 취 소
+		</button>
+		<button type="button" class="btn btn-default btn-lg" id="confirm_btn" value="SIGN-UP">
+			<span class="glyphicon glyphicon-tent" aria-hidden="true" ></span> 확 인
+		</button>
+		
 	    <input type="hidden" name="cmd" value="signin" />
 	    <input type="hidden" name="dir" value="category" />
 	    <input type="hidden" name="page" value="main" />
-	</div>
 </form>
 </div>
 <jsp:include page="../home/bottom.jsp"/>

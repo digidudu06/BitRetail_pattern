@@ -83,22 +83,30 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public CustomerDTO selectCustomer(String CustomerId) {
-		CustomerDTO cus = new CustomerDTO();
+	public CustomerDTO selectCustomer(CustomerDTO cus) {
+		CustomerDTO customer = null;
 		try {
-			String sql = "";
 			PreparedStatement pstmt = DatabaseFactory
 			.creataDatabase(Vendor.ORACLE)
 			.getConnection()
-			.prepareStatement(sql);
+			.prepareStatement(CustomerSQL.SIGNIN.toString());
+			pstmt.setString(1, cus.getCustomerId());
+			pstmt.setString(2, cus.getPassword());
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				
+				customer= new CustomerDTO();
+				customer.setAddress(rs.getString("ADDRESS"));
+				customer.setCity(rs.getString("CITY"));
+				customer.setCustomerId(rs.getString("CUSTOMERID"));
+				customer.setCustomerName(rs.getString("CUSTOMERID"));
+				customer.setPassword(rs.getString("PASSWORD"));
+				customer.setPostalCode(rs.getString("POSTALCODE"));
+				customer.setSsn(rs.getString("SSN"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return cus;
+		return customer;
 	}
 
 	@Override
@@ -118,7 +126,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public boolean existsCustomer(CustomerDTO cus) {
+	public boolean existsCustomerId(CustomerDTO cus) {
 		boolean ok = false;
 		try {
 			String sql = CustomerSQL.SIGNIN.toString();
