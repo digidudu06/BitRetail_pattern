@@ -11,7 +11,7 @@ public interface CustomerDAO {
 	public List<CustomerDTO> selectCustomers(String City);
 	public CustomerDTO selectCustomer(String CustomerId);
 	public int countCustomer();
-	public boolean existsCustomer(String CustomerId);
+	public boolean existsCustomer(CustomerDTO cus);
 	
 	public void updateCustomer(CustomerDTO cus);
 	

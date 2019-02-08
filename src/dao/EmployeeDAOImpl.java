@@ -113,7 +113,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -140,14 +139,33 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public void updateEmployee(EmployeeDTO emp) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "";
+			PreparedStatement pstmt = DatabaseFactory
+			.creataDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			pstmt.setString(1, "");
+			int rs = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public void deleteEmployee(EmployeeDTO emp) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "";
+			PreparedStatement pstmt = DatabaseFactory
+			.creataDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			pstmt.setString(1, "");
+			int rs = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

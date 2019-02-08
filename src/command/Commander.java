@@ -17,7 +17,7 @@ public class Commander {
 		case REGISTER: case SIGNUP:
 			cmd = new CreateCommand(request, response);			
 			break;
-		case ACCESS:
+		case ACCESS: case SIGNIN:
 			cmd = new ExistCommand(request, response);			
 			break;
 		}

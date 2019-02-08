@@ -1,7 +1,7 @@
 package enums;
 
 public enum CustomerSQL {
-	SIGNUP;
+	SIGNUP, SIGNIN;
 	@Override
 	public String toString() {
 		StringBuffer query = new StringBuffer();
@@ -9,6 +9,10 @@ public enum CustomerSQL {
 		case SIGNUP:
 			query.append("INSERT INTO CUSTOMERS(CUSTOMER_ID,CUSTOMER_NAME,PASSWORD,SSN,CITY,POSTAL_CODE,ADDRESS) " + 
 					"VALUES(?,?,?,?,?,?,?)");
+			break;
+		case SIGNIN:
+			query.append("SELECT * FROM CUSTOMERS " + 
+					"WHERE CUSTOMER_ID LIKE ? AND PASSWORD LIKE ?");
 			break;
 		default:
 			break;

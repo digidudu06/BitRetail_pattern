@@ -8,7 +8,7 @@ import domain.CustomerDTO;
 
 public class CustomerServiceImpl implements CustomerService {
 	private static CustomerServiceImpl instance = new CustomerServiceImpl();
-	public CustomerServiceImpl() {dao = new CustomerDAOImpl().getInstance();}
+	private CustomerServiceImpl() {dao = new CustomerDAOImpl().getInstance();}
 	public static CustomerServiceImpl getInstance() {return instance;}
 	private CustomerDAO dao;
 
@@ -42,9 +42,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public boolean existsCustomer(String CustomerId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existsCustomer(CustomerDTO cus) {		
+		return dao.existsCustomer(cus);
 	}
 
 	@Override

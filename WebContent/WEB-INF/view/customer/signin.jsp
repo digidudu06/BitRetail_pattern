@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../home/top.jsp"/>
-<link rel="stylesheet" href="${css}/employee/access.css" />
+<link rel="stylesheet" href="${css}/customer/signin.css" />
 <div class="grid-item" id="side_menu">
 	<h1><font style="font-size: 30px">회원 접속</font></h1>
 </div>
