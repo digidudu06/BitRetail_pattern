@@ -31,9 +31,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 			pstmt.setString(2, cus.getCustomerName());
 			pstmt.setString(3, cus.getPassword());
 			pstmt.setString(4, cus.getSsn());
-			pstmt.setString(5, cus.getCity());
-			pstmt.setString(6, cus.getPostalCode());
-			pstmt.setString(7, cus.getAddress());
+			pstmt.setString(5, cus.getPhone());
+			pstmt.setString(6, cus.getCity());
+			pstmt.setString(7, cus.getPostalCode());
+			pstmt.setString(8, cus.getAddress());
 			int rs = pstmt.executeUpdate();
 			System.out.println((rs==1)?"성공":"실패");
 		} catch (Exception e) {
@@ -45,16 +46,23 @@ public class CustomerDAOImpl implements CustomerDAO{
 	@Override
 	public List<CustomerDTO> selectCustomerLists() {
 		List<CustomerDTO> list = new ArrayList<>();
-		String sql = "";
 		try {
 			PreparedStatement pstmt = DatabaseFactory
 			.creataDatabase(Vendor.ORACLE)
 			.getConnection()
-			.prepareStatement(sql);
-			pstmt.setString(1, "");
+			.prepareStatement(CustomerSQL.LIST.toString());
 			ResultSet rs = pstmt.executeQuery();
+			CustomerDTO cust = null;
 			while(rs.next()) {
-				list.add(null);
+				cust = new CustomerDTO();
+				cust.setCustomerId(rs.getString("CUSTOMER_ID"));
+                cust.setCustomerName(rs.getString("CUSTOMER_NAME"));
+                cust.setSsn(rs.getString("SSN"));
+                cust.setPhone(rs.getString("PHONE"));
+                cust.setCity(rs.getString("CITY"));
+                cust.setAddress(rs.getString("ADDRESS"));
+                cust.setPostalCode(rs.getString("POSTAL_CODE"));
+				list.add(cust);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

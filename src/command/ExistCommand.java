@@ -1,5 +1,7 @@
 package command;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,6 +25,12 @@ public class ExistCommand extends Command {
 			boolean exist = EmployeeServiceImpl.getInstance().existsEmployee(emp);
 			if(exist) {
 				System.out.println("ACCESS접속성공");
+				List<CustomerDTO> list = CustomerServiceImpl
+						.getInstance()
+						.bringCustomerLists();
+				request.setAttribute("list", list);
+				System.out.println("총 고객의 수 : "+list.size());
+				System.out.println("가장 최근에 가입한 고객명 : "+list.get(0).getCustomerName());
 			}else {
 				System.out.println("ACCESS접속실패");
 				super.setDomain("home");

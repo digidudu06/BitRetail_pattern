@@ -31,13 +31,18 @@
 				placeholder="Username" aria-describedby="basic-addon1">
 		</div>
 		<div class="input-group">
-			<span class="input-group-addon" id="basic-addon1">도시</span> <input
-				type="text" id="city" name="city" class="form-control"
+			<span class="input-group-addon" id="basic-addon1">전화번호</span> <input
+				type="text" id="phone" name="phone" class="form-control"
 				placeholder="Username" aria-describedby="basic-addon1">
 		</div>
 		<div class="input-group">
 			<span class="input-group-addon" id="basic-addon1">우편번호</span> <input
 				type="text" id="postalCode" name="postalCode" class="form-control"
+				placeholder="Username" aria-describedby="basic-addon1">
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" id="basic-addon1">도시</span> <input
+				type="text" id="city" name="city" class="form-control"
 				placeholder="Username" aria-describedby="basic-addon1">
 		</div>
 		<div class="input-group">

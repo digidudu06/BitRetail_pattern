@@ -19,8 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<CustomerDTO> bringCustomerLists() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectCustomerLists();
 	}
 
 	@Override
