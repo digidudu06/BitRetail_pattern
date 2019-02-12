@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import domain.CustomerDTO;
 import domain.EmployeeDTO;
 import enums.Action;
+import proxy.Pagenation;
+import proxy.Proxy;
 import service.CustomerServiceImpl;
 import service.EmployeeServiceImpl;
 
@@ -27,10 +29,10 @@ public class ExistCommand extends Command {
 				System.out.println("ACCESS접속성공");
 				List<CustomerDTO> list = CustomerServiceImpl
 						.getInstance()
-						.bringCustomerLists();
+						.bringCustomerLists(new Proxy().getPage());
 				request.setAttribute("list", list);
-				System.out.println("총 고객의 수 : "+list.size());
-				System.out.println("가장 최근에 가입한 고객명 : "+list.get(0).getCustomerName());
+				//System.out.println("총 고객의 수 : "+list.size());
+				//System.out.println("가장 최근에 가입한 고객명 : "+list.get(0).getCustomerName());
 			}else {
 				System.out.println("ACCESS접속실패");
 				super.setDomain("home");

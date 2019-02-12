@@ -5,12 +5,13 @@ import java.util.List;
 import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import domain.CustomerDTO;
+import proxy.Pagenation;
 
 public class CustomerServiceImpl implements CustomerService {
 	private static CustomerServiceImpl instance = new CustomerServiceImpl();
-	private CustomerServiceImpl() {dao = new CustomerDAOImpl().getInstance();}
+	private CustomerServiceImpl() {dao = CustomerDAOImpl.getInstance();}
 	public static CustomerServiceImpl getInstance() {return instance;}
-	private CustomerDAO dao;
+	CustomerDAO dao;
 
 	@Override
 	public void joinCustomer(CustomerDTO cus) {
@@ -18,13 +19,12 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<CustomerDTO> bringCustomerLists() {
-		return dao.selectCustomerLists();
+	public List<CustomerDTO> bringCustomerLists(Pagenation page) {
+		return dao.selectCustomerLists(page);
 	}
 
 	@Override
 	public List<CustomerDTO> retrieveCustomers(String City) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -35,8 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public int countCustomer() {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.countCustomer();
 	}
 
 	@Override

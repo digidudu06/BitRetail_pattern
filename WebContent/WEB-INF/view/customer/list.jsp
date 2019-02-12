@@ -24,9 +24,9 @@
 	    <th>상세주소</th>
 	    <th>우편번호</th>
 	  </tr>
-	  <c:forEach items="${list}" var="cust">
+	  <c:forEach items="${list}" var="cust" step="1">
 	  <tr>
-	    <td>1</td>
+	    <td>${cust.rnum}</td>
 	    <td>${cust.customerId}</td>
 	    <td>${cust.customerName}</td>
 	    <td>${cust.ssn}</td>
@@ -44,7 +44,7 @@
 	  <div class="pagination">
 	  <a href="#">&laquo;</a>
 	  <a href="#" class="active">1</a>
-	  <a href="#">2</a>
+	  <a href="#" id="two">2</a>
 	  <a href="#">3</a>
 	  <a href="#">4</a>
 	  <a href="#">5</a>
@@ -53,3 +53,11 @@
 	</div>
 </div>
 <jsp:include page="../home/bottom.jsp"/>
+<script>
+$('#two').click(function(){
+	alert('2페이지 누름');
+	//page_num, pageSize
+	//?cmd=list&page=list&page_num=2&page_size=5
+	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=2&page_size=5');
+});
+</script>

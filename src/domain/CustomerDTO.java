@@ -3,7 +3,8 @@ package domain;
 import lombok.Data;
 
 public @Data class CustomerDTO {
-	private String customerId,
+	private String rnum,
+					customerId,
 					customerName,
 					password,
 					ssn,

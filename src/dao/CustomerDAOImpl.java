@@ -2,16 +2,14 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.org.apache.regexp.internal.recompile;
 
 import domain.CustomerDTO;
 import enums.CustomerSQL;
 import enums.Vendor;
 import factory.DatabaseFactory;
+import proxy.Pagenation;
 
 public class CustomerDAOImpl implements CustomerDAO{
 	private static CustomerDAOImpl instance = new CustomerDAOImpl();
@@ -44,13 +42,15 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public List<CustomerDTO> selectCustomerLists() {
+	public List<CustomerDTO> selectCustomerLists(Pagenation page) {
 		List<CustomerDTO> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = DatabaseFactory
 			.creataDatabase(Vendor.ORACLE)
 			.getConnection()
 			.prepareStatement(CustomerSQL.LIST.toString());
+			pstmt.setString(1, page.getStartRow());
+			pstmt.setString(2, page.getEndRow());
 			ResultSet rs = pstmt.executeQuery();
 			CustomerDTO cust = null;
 			while(rs.next()) {
@@ -62,6 +62,7 @@ public class CustomerDAOImpl implements CustomerDAO{
                 cust.setCity(rs.getString("CITY"));
                 cust.setAddress(rs.getString("ADDRESS"));
                 cust.setPostalCode(rs.getString("POSTAL_CODE"));
+                cust.setRnum(rs.getString("RNUM"));
 				list.add(cust);
 			}
 		} catch (Exception e) {
@@ -121,12 +122,15 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public int countCustomer() {
 		int count = 0;
 		try {
-			String sql = "";
+			String sql = CustomerSQL.COUNT.toString();
 			PreparedStatement pstmt = DatabaseFactory
 			.creataDatabase(Vendor.ORACLE)
 			.getConnection()
 			.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				count=rs.getInt("count");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

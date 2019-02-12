@@ -20,6 +20,9 @@ public class Commander {
 		case ACCESS: case SIGNIN:
 			cmd = new ExistCommand(request, response);			
 			break;
+		case CUST_LIST:
+			cmd = new ListCommand(request, response);			
+			break;
 		}
 		System.out.println("커맨더 내부 : "+Receiver.cmd.getView());
 		return cmd;
