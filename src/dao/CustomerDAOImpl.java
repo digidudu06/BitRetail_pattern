@@ -49,8 +49,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 			.creataDatabase(Vendor.ORACLE)
 			.getConnection()
 			.prepareStatement(CustomerSQL.LIST.toString());
-			pstmt.setString(1, page.getStartRow());
-			pstmt.setString(2, page.getEndRow());
+			pstmt.setString(1, page.getEndRow());
+			pstmt.setString(2, page.getStartRow());
 			ResultSet rs = pstmt.executeQuery();
 			CustomerDTO cust = null;
 			while(rs.next()) {
