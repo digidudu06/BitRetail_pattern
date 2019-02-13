@@ -9,7 +9,9 @@ import domain.CustomerDTO;
 import enums.CustomerSQL;
 import enums.Vendor;
 import factory.DatabaseFactory;
-import proxy.Pagenation;
+import proxy.PageProxy;
+import proxy.Pagination;
+import proxy.Proxy;
 
 public class CustomerDAOImpl implements CustomerDAO{
 	private static CustomerDAOImpl instance = new CustomerDAOImpl();
@@ -42,15 +44,20 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public List<CustomerDTO> selectCustomerLists(Pagenation page) {
+	public List<CustomerDTO> selectCustomerLists(Proxy pxy) {
 		List<CustomerDTO> list = new ArrayList<>();
 		try {
+			Pagination page = ((PageProxy)pxy).getPage();
 			PreparedStatement pstmt = DatabaseFactory
 			.creataDatabase(Vendor.ORACLE)
 			.getConnection()
 			.prepareStatement(CustomerSQL.LIST.toString());
-			pstmt.setString(1, page.getEndRow());
-			pstmt.setString(2, page.getStartRow());
+			String startRow = page.getStartRow()+"";
+			String endRow = page.getEndRow()+"";
+			System.out.println("DAO 스타트로우"+startRow);
+			System.out.println("DAO end"+endRow);
+			pstmt.setString(1, page.getStartRow()+"");
+			pstmt.setString(2, page.getEndRow()+"");
 			ResultSet rs = pstmt.executeQuery();
 			CustomerDTO cust = null;
 			while(rs.next()) {
@@ -72,7 +79,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public List<CustomerDTO> selectCustomers(String City) {
+	public List<CustomerDTO> selectCustomers(Proxy pxy) {
 		List<CustomerDTO> list = new ArrayList<>();
 		try {
 			String sql = "";
@@ -119,17 +126,17 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public int countCustomer() {
+	public int countCustomer(Proxy pxy) {
 		int count = 0;
 		try {
-			String sql = CustomerSQL.COUNT.toString();
+			String sql = CustomerSQL.ROW_COUNT.toString();
 			PreparedStatement pstmt = DatabaseFactory
 			.creataDatabase(Vendor.ORACLE)
 			.getConnection()
 			.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				count=rs.getInt("count");
+			if(rs.next()) {
+				count=rs.getInt("COUNT");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

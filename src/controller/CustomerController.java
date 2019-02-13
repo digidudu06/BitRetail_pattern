@@ -15,7 +15,7 @@ public class CustomerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------커스터머 컨트롤러-----------");
+		System.out.println("----------1.커스터머 컨트롤러-----------");
 		Receiver.init(request, response);
 		Carrier.forward(request, response);
 	}

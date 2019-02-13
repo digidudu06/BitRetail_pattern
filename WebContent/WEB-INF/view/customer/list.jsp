@@ -43,21 +43,21 @@
 	<div class="center">
 	  <div class="pagination">
 	  <a href="#">&laquo;</a>
-	  <a href="#" class="active">1</a>
-	  <a href="#" id="two">2</a>
-	  <a href="#">3</a>
-	  <a href="#">4</a>
-	  <a href="#">5</a>
-	  <a href="#">&raquo;</a>
+	  <c:forEach begin="1" end="6" varStatus="status">
+		  <a href="#" id="page_${status.count}">${status.count}</a>
+	  </c:forEach>
+
+	  <a href="#" >&raquo;</a>
 	  </div>
 	</div>
 </div>
 <jsp:include page="../home/bottom.jsp"/>
 <script>
-$('#two').click(function(){
-	alert('2페이지 누름');
+$('page_2').click(function(){
+	//alert('2페이지 누름');
 	//page_num, pageSize
 	//?cmd=list&page=list&page_num=2&page_size=5
-	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=2&page_size=5');
+	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=2');
 });
+
 </script>
