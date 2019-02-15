@@ -41,6 +41,7 @@ public class ExistCommand extends Command {
 				request.setAttribute("list", list);
 				System.out.println("한 페이지 고객의 수 : "+list.size());
 				//System.out.println("가장 최근에 가입한 고객명 : "+list.get(0).getCustomerName());
+				request.setAttribute("pagination", paging);
 			}else {
 				System.out.println("ACCESS접속실패");
 				super.setDomain("home");

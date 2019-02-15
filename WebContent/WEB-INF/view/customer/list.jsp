@@ -24,11 +24,11 @@
 	    <th>상세주소</th>
 	    <th>우편번호</th>
 	  </tr>
-	  <c:forEach items="${list}" var="cust" step="1">
+	  <c:forEach items="${list}" var="cust">
 	  <tr>
 	    <td>${cust.rnum}</td>
 	    <td>${cust.customerId}</td>
-	    <td>${cust.customerName}</td>
+	    <td><a href="${ctx}/customer.do?cmd=cust_retrieve&page=detail&customer_id=${cust.customerId}">${cust.customerName}</a></td>
 	    <td>${cust.ssn}</td>
 	    <td>남</td>
 	    <td>${cust.phone}</td>
@@ -42,22 +42,32 @@
 	<div style="height: 50px"></div>    
 	<div class="center">
 	  <div class="pagination">
-	  <a href="#">&laquo;</a>
-	  <c:forEach begin="1" end="6" varStatus="status">
-		  <a href="#" id="page_${status.count}">${status.count}</a>
-	  </c:forEach>
-
-	  <a href="#" >&raquo;</a>
+		  <c:if test="${pagination.existPrev}">
+			  <a href='${ctx}/customer.do?cmd=cust_list&page=list&page_num=${pagination.prevBlock}'>&laquo;</a>
+		  </c:if>
+		  <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" varStatus="status">
+			  <c:choose>
+			  	<c:when test="${pagination.pageNum eq status.index}">
+			  		<a href="#" class="page active">${status.index}</a>
+			  	</c:when>
+			  	<c:otherwise>
+			  		<a href="#" class="page">${status.index}</a>
+			  	</c:otherwise>
+			  </c:choose>
+		  </c:forEach>
+		  <c:if test="${pagination.existNext}">
+			  <a href='${ctx}/customer.do?cmd=cust_list&page=list&page_num=${pagination.nextBlock}'>&raquo;</a>
+		  </c:if>
 	  </div>
 	</div>
 </div>
 <jsp:include page="../home/bottom.jsp"/>
 <script>
-$('page_2').click(function(){
-	//alert('2페이지 누름');
+$('.page').click(function(){
+	alert('2페이지 누름' + $(this).text());
 	//page_num, pageSize
 	//?cmd=list&page=list&page_num=2&page_size=5
-	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=2');
+	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num='+$(this).text());
 });
 
 </script>

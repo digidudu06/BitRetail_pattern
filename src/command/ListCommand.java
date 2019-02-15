@@ -34,6 +34,7 @@ public class ListCommand extends Command {
 										.getInstance()
 										.bringCustomerLists(pagePxy);
 			request.setAttribute("list", list);
+			request.setAttribute("pagination", paging);
 			break;
 
 		default:

@@ -1,7 +1,9 @@
 package enums;
 
+import proxy.Proxy;
+
 public enum CustomerSQL {
-	SIGNUP, SIGNIN, LIST, ROW_COUNT;
+	SIGNUP, SIGNIN, LIST, ROW_COUNT, CUS_PHONE, CUST_RETRIEVE;
 	@Override
 	public String toString() {
 		StringBuffer query = new StringBuffer();
@@ -24,6 +26,14 @@ public enum CustomerSQL {
 			break;
 		case ROW_COUNT:
 			query.append("SELECT COUNT(*) COUNT FROM CUSTOMERS");
+			break;
+		case CUS_PHONE:
+			query.append("SELECT CUSTOMER_ID, CUSTOMER_NAME, PHONE \n" + 
+					"FROM CUSTOMERS");
+			break;
+		case CUST_RETRIEVE:
+			query.append("SELECT * FROM CUSTOMERS\n" + 
+					"WHERE CUSTOMER_ID LIKE ?");
 			break;
 		default:
 			break;

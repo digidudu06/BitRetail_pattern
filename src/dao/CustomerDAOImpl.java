@@ -2,10 +2,14 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import domain.CustomerDTO;
+import enums.Action;
 import enums.CustomerSQL;
 import enums.Vendor;
 import factory.DatabaseFactory;
@@ -102,21 +106,25 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public CustomerDTO selectCustomer(CustomerDTO cus) {
 		CustomerDTO customer = null;
 		try {
+			String sql = CustomerSQL.SIGNIN.toString();
 			PreparedStatement pstmt = DatabaseFactory
-			.creataDatabase(Vendor.ORACLE)
-			.getConnection()
-			.prepareStatement(CustomerSQL.SIGNIN.toString());
+					.creataDatabase(Vendor.ORACLE)
+					.getConnection()
+					.prepareStatement(sql);
 			pstmt.setString(1, cus.getCustomerId());
 			pstmt.setString(2, cus.getPassword());
+		
 			ResultSet rs = pstmt.executeQuery();
+			
+			
 			while(rs.next()) {
 				customer= new CustomerDTO();
 				customer.setAddress(rs.getString("ADDRESS"));
 				customer.setCity(rs.getString("CITY"));
-				customer.setCustomerId(rs.getString("CUSTOMERID"));
-				customer.setCustomerName(rs.getString("CUSTOMERID"));
+				customer.setCustomerId(rs.getString("CUSTOMER_ID"));
+				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
 				customer.setPassword(rs.getString("PASSWORD"));
-				customer.setPostalCode(rs.getString("POSTALCODE"));
+				customer.setPostalCode(rs.getString("POSTAL_CODE"));
 				customer.setSsn(rs.getString("SSN"));
 			}
 		} catch (Exception e) {
@@ -192,6 +200,55 @@ public class CustomerDAOImpl implements CustomerDAO{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public Map<String, Object> selectPhone(Proxy pxy) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		CustomerDTO customer = null;
+		try {
+			String sql = CustomerSQL.CUS_PHONE.toString();
+			PreparedStatement ps = DatabaseFactory
+			.creataDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				customer = new CustomerDTO();
+				customer.setCustomerId(rs.getString("CUSTOMER_ID"));
+				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
+				customer.setPhone(rs.getString("PHONE"));
+				map.put(rs.getString("CUSTOMER_ID"), customer);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
+	@Override
+	public CustomerDTO selectOneCustomer(CustomerDTO cus) {
+		CustomerDTO customer = new CustomerDTO();
+		try {
+			String sql = CustomerSQL.CUST_RETRIEVE.toString();
+			PreparedStatement pstmt = DatabaseFactory
+					.creataDatabase(Vendor.ORACLE)
+					.getConnection()
+					.prepareStatement(sql);
+			pstmt.setString(1, cus.getCustomerId());
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				customer.setAddress(rs.getString("ADDRESS"));
+				customer.setCity(rs.getString("CITY"));
+				customer.setCustomerId(rs.getString("CUSTOMER_ID"));
+				customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
+				customer.setPhone(rs.getString("PHONE"));
+				customer.setPostalCode(rs.getString("POSTAL_CODE"));
+				customer.setSsn(rs.getString("SSN"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return customer;
 	}
 	
 

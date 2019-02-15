@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
@@ -26,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<CustomerDTO> retrieveCustomers(Proxy pxy) {
-		return null;
+		return dao.selectCustomers(pxy);
 	}
 
 	@Override
@@ -54,6 +55,14 @@ public class CustomerServiceImpl implements CustomerService {
 	public void removeCustomer(CustomerDTO cus) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public Map<String, Object> retrievePhone(Proxy pxy) {
+		return dao.selectPhone(pxy);
+	}
+	@Override
+	public CustomerDTO retrieveOneCustomer(CustomerDTO cus) {
+		return dao.selectOneCustomer(cus);
 	}
 
 }
