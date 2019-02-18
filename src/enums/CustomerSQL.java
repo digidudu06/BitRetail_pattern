@@ -3,7 +3,7 @@ package enums;
 import proxy.Proxy;
 
 public enum CustomerSQL {
-	SIGNUP, SIGNIN, LIST, ROW_COUNT, CUS_PHONE, CUST_RETRIEVE;
+	SIGNUP, SIGNIN, LIST, ROW_COUNT, CUS_PHONE, CUST_RETRIEVE, CUST_UPDATE;
 	@Override
 	public String toString() {
 		StringBuffer query = new StringBuffer();
@@ -34,6 +34,15 @@ public enum CustomerSQL {
 		case CUST_RETRIEVE:
 			query.append("SELECT * FROM CUSTOMERS\n" + 
 					"WHERE CUSTOMER_ID LIKE ?");
+			break;
+		case CUST_UPDATE:
+			query.append("UPDATE CUSTOMERS \n" + 
+					"SET PASSWORD = ?\n" + 
+					",ADDRESS = ?\n" + 
+					",CITY = ?\n" + 
+					",POSTAL_CODE = ?\n" + 
+					",PHONE = ?\n" + 
+					"WHERE CUSTOMER_ID = ?");
 			break;
 		default:
 			break;
