@@ -63,5 +63,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public CustomerDTO retrieveOneCustomer(CustomerDTO cus) {
 		return dao.selectOneCustomer(cus);
 	}
+	@Override
+	public CustomerDTO fileUpload(Proxy pxy) {
+		return dao.selectProfile(pxy);
+	}
 
 }

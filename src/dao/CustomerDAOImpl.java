@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,17 +10,20 @@ import java.util.List;
 import java.util.Map;
 
 import domain.CustomerDTO;
-import enums.Action;
 import enums.CustomerSQL;
 import enums.Vendor;
 import factory.DatabaseFactory;
+import proxy.ImageProxy;
 import proxy.PageProxy;
 import proxy.Pagination;
 import proxy.Proxy;
 
 public class CustomerDAOImpl implements CustomerDAO{
 	private static CustomerDAOImpl instance = new CustomerDAOImpl();
-	public CustomerDAOImpl() {}
+	Connection conn;
+	public CustomerDAOImpl() {
+		conn = DatabaseFactory.creataDatabase(Vendor.ORACLE).getConnection();
+	}
 	public static CustomerDAOImpl getInstance() {return instance;}
 
 	@Override
@@ -175,10 +179,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public void updateCustomer(CustomerDTO cus) {
 		try {
 			String sql = CustomerSQL.CUST_UPDATE.toString();
-			PreparedStatement pstmt = DatabaseFactory
-					.creataDatabase(Vendor.ORACLE)
-					.getConnection()
-					.prepareStatement(sql);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cus.getPassword());
 			pstmt.setString(2, cus.getAddress());
 			pstmt.setString(3, cus.getCity());
@@ -254,6 +255,28 @@ public class CustomerDAOImpl implements CustomerDAO{
 			e.printStackTrace();
 		}
 		return customer;
+	}
+	@Override
+	public CustomerDTO selectProfile(Proxy pxy) {
+		CustomerDTO cust = new CustomerDTO();
+		try {
+			String sql = "UPDATE CUSTOMERS SET PHOTO = ? WHERE CUSTOMER_ID LIKE ?";
+			ImageProxy imageProxy = (ImageProxy) pxy;
+			ImageDAOImpl.getInstance().insertImage(((ImageProxy) pxy).getImg());
+			String imgSeq = ImageDAOImpl.getInstance().lastImageSeq();
+			
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, imgSeq);
+			pstmt.setString(2, imageProxy.getImg().getOwner());
+			
+			cust.setCustomerId(imageProxy.getImg().getOwner());
+			
+			ResultSet rs = pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 	
 

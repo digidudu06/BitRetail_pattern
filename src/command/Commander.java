@@ -14,6 +14,7 @@ public class Commander {
 		Command cmd = null;
 		RequestProxy req = (RequestProxy) pxy.get("req");
 		HttpServletRequest request = req.getRequest();
+		System.out.println("Command 에서 cmd"+request.getParameter("cmd"));
 		switch(Action.valueOf(request.getParameter("cmd").toUpperCase())) {
 		case MOVE:
 			cmd = new Command(pxy);
@@ -32,6 +33,9 @@ public class Commander {
 			break;
 		case CUST_UPDATE:
 			cmd = new UpdateCommand(pxy);			
+			break;
+		case CUST_FILE_UPLOAD:
+			cmd = new FileCommand(pxy);
 			break;
 		}
 		System.out.println("커맨더 내부 : "+Receiver.cmd.getView());

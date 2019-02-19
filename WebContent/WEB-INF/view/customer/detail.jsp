@@ -5,7 +5,12 @@
 	<jsp:include page="../employee/nav.jsp"/>
 </div>
 <div class="grid-item" id="side_menu">
- 	<img src="${img}/default_image.png" />
+	<form id="file_form">
+ 		<img src="${img}/${image.imgName}.${image.imgExtention}"/><br />
+ 		<input type="file" name="file_upload" />
+ 		<input type="submit" id="file_upload_btn" />
+	</form>
+ 	<span id="photo_btn" class="label label-primary">프로필 변경</span>
 </div>
 <div class="grid-item">
 	<div>
@@ -27,6 +32,14 @@
 <script>
 $('#update_btn').click(function(){
 	location.assign('${ctx}/customer.do?cmd=cust_retrieve&page=update&customer_id=${cust.customerId}');
+});
+
+$('#file_upload_btn').click(function(){
+	$('#file_form')
+	.attr('method','post')
+	.attr('action','${ctx}/customer.do?cmd=cust_file_upload&page=detail&customer_id=${cust.customerId}')
+	.attr('enctype','multipart/form-data')
+	.submit();
 });
 
 </script>
