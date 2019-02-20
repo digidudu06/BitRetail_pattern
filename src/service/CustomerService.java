@@ -19,7 +19,7 @@ public interface CustomerService {
 	public boolean existsCustomerId(CustomerDTO cus);
 	
 	public void modifyCustomer(CustomerDTO cus);
-	public CustomerDTO fileUpload(Proxy pxy);
+	public Map<String, Object> fileUpload(Proxy pxy);
 	
 	public void removeCustomer(CustomerDTO cus);
 	

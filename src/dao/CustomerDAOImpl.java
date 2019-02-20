@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import domain.CustomerDTO;
+import domain.ImageDTO;
 import enums.CustomerSQL;
 import enums.Vendor;
 import factory.DatabaseFactory;
@@ -257,25 +258,36 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return customer;
 	}
 	@Override
-	public CustomerDTO selectProfile(Proxy pxy) {
+	public Map<String, Object> selectProfile(Proxy pxy) {
+		Map<String, Object> map = new HashMap<>();
 		CustomerDTO cust = new CustomerDTO();
 		try {
-			String sql = "UPDATE CUSTOMERS SET PHOTO = ? WHERE CUSTOMER_ID LIKE ?";
 			ImageProxy imageProxy = (ImageProxy) pxy;
-			ImageDAOImpl.getInstance().insertImage(((ImageProxy) pxy).getImg());
-			String imgSeq = ImageDAOImpl.getInstance().lastImageSeq();
+			ImageDAOImpl.getInstance().insertImage(imageProxy.getImg());
 			
+			String imgSeq = ImageDAOImpl.getInstance().lastImageSeq(imageProxy.getImg());
+			
+			String sql = "UPDATE CUSTOMERS SET PHOTO = ? WHERE CUSTOMER_ID LIKE ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, imgSeq);
 			pstmt.setString(2, imageProxy.getImg().getOwner());
 			
 			cust.setCustomerId(imageProxy.getImg().getOwner());
 			
+			cust = selectOneCustomer(cust);
+			
+			ImageDTO img = new ImageDTO();
+			img.setImgSeq(imgSeq);
+			img = ImageDAOImpl
+					.getInstance()
+					.selectOneImage(img);
+			map.put("image", img);
+			map.put("cust", cust);
 			ResultSet rs = pstmt.executeQuery();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return map;
 		
 	}
 	

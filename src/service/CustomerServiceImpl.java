@@ -64,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return dao.selectOneCustomer(cus);
 	}
 	@Override
-	public CustomerDTO fileUpload(Proxy pxy) {
+	public Map<String, Object> fileUpload(Proxy pxy) {
 		return dao.selectProfile(pxy);
 	}
 

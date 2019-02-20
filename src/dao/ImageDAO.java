@@ -11,7 +11,7 @@ public interface ImageDAO {
 	public List<ImageDTO> selectImageList(Proxy pxy);
 	public List<ImageDTO> selectImages(Proxy pxy);
 	public ImageDTO selectOneImage(ImageDTO img);
-	public String lastImageSeq();
+	public String lastImageSeq(ImageDTO img);
 	
 	public int countImages(Proxy pxy);
 	public boolean existImage(ImageDTO img);

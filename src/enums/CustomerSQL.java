@@ -1,7 +1,5 @@
 package enums;
 
-import proxy.Proxy;
-
 public enum CustomerSQL {
 	SIGNUP, SIGNIN, LIST, ROW_COUNT, CUS_PHONE, CUST_RETRIEVE, CUST_UPDATE;
 	@Override

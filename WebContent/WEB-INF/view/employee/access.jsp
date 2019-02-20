@@ -9,7 +9,7 @@
 <form id="form" name="form" >
 	<div class="grid-container">
 	    <div class="grid-item" id="item_1">사원번호</div>
-	    <div class="grid-item" id="item_2"><input type="text" id="empno" name="empno" value="1060"></div>
+	    <div class="grid-item" id="item_2"><input type="text" id="empno" name="empno" value="1082"></div>
 	    <div class="grid-item" id="item_3">이 름</div>
 	    <div class="grid-item" id="item_4"><input type="text" id="name" name="name" value="오재원" ></div>
 	    <div class="grid-item" id="item_11"><input type="submit" id="confirm_btn" value='확 인'></div>

@@ -56,5 +56,9 @@ public class ImageServiceImpl implements ImageService {
 	public void removeImage(ImageDTO img) {
 		dao.deleteImage(img);
 	}
+	@Override
+	public String lastImageSeq(ImageDTO img) {
+		return dao.lastImageSeq(img);
+	}
 
 }
