@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+#nav{
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+#content{
+    grid-column-start: 1;
+    grid-column-end: 5;
+}

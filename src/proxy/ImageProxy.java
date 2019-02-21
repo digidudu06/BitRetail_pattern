@@ -44,14 +44,14 @@ public class ImageProxy implements Proxy {
 					file = new File(Props.IMG.getValue()+fileName);
 					item.write(file);
 					img = new ImageDTO();
-					System.out.println("파일명 : "+fileName.substring(0,fileName.indexOf(".")));
-					img.setImgName(fileName.substring(0,fileName.indexOf(".")));
 					
-					System.out.println("확장자 : "+fileName.substring(fileName.indexOf(".")+1));
+					img.setImgName(fileName.substring(0,fileName.indexOf(".")));
 					img.setImgExtention(fileName.substring(fileName.indexOf(".")+1));
+				
+					System.out.println("파일명 : "+img.getImgName()+"******확장자 : "+img.getImgExtention());					
 					
 					System.out.println("이미지 : "+request.getParameter("customer_id"));
-					img.setOwner(request.getParameter("customer_id"));					
+					img.setOwner(request.getParameter("customer_id"));
 				}
 			}
 		} catch (Exception e) {

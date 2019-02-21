@@ -25,7 +25,7 @@
 	</div>
 	<div>
 		<span id="update_btn" class="label label-success">수정</span>
-		<span class="label label-danger">삭제</span>
+		<span id="delete_btn" class="label label-danger">회원탈퇴</span>
 	</div>
 </div>
 <jsp:include page="../home/bottom.jsp"/>
@@ -42,4 +42,7 @@ $('#file_upload_btn').click(function(){
 	.submit();
 });
 
+$('#delete_btn').click(function(){
+	location.assign('${ctx}/customer.do?cmd=cust_delete&dir=home&page=main&customer_id=${cust.customerId}');
+});
 </script>

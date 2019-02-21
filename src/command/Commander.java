@@ -37,6 +37,9 @@ public class Commander {
 		case CUST_FILE_UPLOAD:
 			cmd = new FileCommand(pxy);
 			break;
+		case CUST_DELETE:
+			cmd = new DeleteCommand(pxy);
+			break;
 		}
 		System.out.println("커맨더 내부 : "+Receiver.cmd.getView());
 		return cmd;

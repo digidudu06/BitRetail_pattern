@@ -196,13 +196,14 @@ public class CustomerDAOImpl implements CustomerDAO{
 	@Override
 	public void deleteCustomer(CustomerDTO cus) {
 		try {
-			String sql = "";
+			String sql = CustomerSQL.CUST_DELETE.toString();
 			PreparedStatement pstmt = DatabaseFactory
 			.creataDatabase(Vendor.ORACLE)
 			.getConnection()
 			.prepareStatement(sql);
-			pstmt.setString(1, "");
+			pstmt.setString(1, cus.getCustomerId());
 			int rs = pstmt.executeUpdate();
+			if(rs==1) {System.out.println("성공");}else {System.out.println("실패");}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

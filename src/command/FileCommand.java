@@ -27,7 +27,6 @@ public class FileCommand extends Command {
 			imageProxy.carryOut(request);
 			ImageDTO image = imageProxy.getImg();
 			String customerId = imageProxy.getImg().getOwner();
-//			CustomerServiceImpl.getInstance().fileUpload(imageProxy);
 			
 			Map<String, Object> map = new HashMap<>();
 			map =CustomerServiceImpl

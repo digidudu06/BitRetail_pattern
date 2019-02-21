@@ -52,8 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void removeCustomer(CustomerDTO cus) {
-		// TODO Auto-generated method stub
-		
+		dao.deleteCustomer(cus);		
 	}
 	@Override
 	public Map<String, Object> retrievePhone(Proxy pxy) {

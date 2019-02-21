@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../home/top.jsp"/>
-<link rel="stylesheet" href="${css}/home/main.css" />
-    <div class="bs-example" data-example-id="thumbnails-with-custom-content">
+<link rel="stylesheet" href="${css}/category/main.css" />
+<div class="grid-item" id="nav">
+	<jsp:include page="nav.jsp"/>
+</div>
+
+    <div class="bs-example grid-item" data-example-id="thumbnails-with-custom-content" id="content">
     <div class="row">
-      <div class="col-sm-6 col-md-4">
+      <div class="col-sm-6 col-md-4" id>
         <div class="thumbnail">
           <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDE5MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjcwLjA1NDY4NzUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE5MngyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
           <div class="caption">
@@ -36,13 +40,10 @@
       </div>
     </div>
   </div>
+
 <jsp:include page="../home/bottom.jsp"/>  
 <script>
-$('#emp_register').click(function(){
-	location.assign('employee.do?cmd=move&page=register');
-});
-
-$('#emp_access').click(function(){
-	location.assign('employee.do?cmd=move&page=access');
+$('#mypage a').click(function(){
+	location.assign('${ctx}/customer.do?cmd=cust_retrieve&page=detail&customer_id=${customer.customerId}');
 })
 </script>
