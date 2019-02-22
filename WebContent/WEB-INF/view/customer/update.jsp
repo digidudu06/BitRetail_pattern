@@ -33,13 +33,13 @@
 </form>
 <jsp:include page="../home/bottom.jsp"/>
 <script>
-$('#confirm_btn').click(function(){
+$('#confirm_btn').click(()=>{
 	var form = $('#update_form');
 	form.attr('action','${ctx}/customer.do');
 	form.attr('method','post');
 	form.submit();
 });
-$('#cancel_btn').click(function(){
+$('#cancel_btn').click(()=>{
 	alert('취소');
 });
 

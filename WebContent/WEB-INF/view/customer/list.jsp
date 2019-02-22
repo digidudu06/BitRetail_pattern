@@ -63,7 +63,7 @@
 </div>
 <jsp:include page="../home/bottom.jsp"/>
 <script>
-$('.page').click(function(){
+$('.page').click(()=>{
 	alert('2페이지 누름' + $(this).text());
 	//page_num, pageSize
 	//?cmd=list&page=list&page_num=2&page_size=5

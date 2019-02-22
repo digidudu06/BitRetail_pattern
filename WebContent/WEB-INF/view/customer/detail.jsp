@@ -30,11 +30,11 @@
 </div>
 <jsp:include page="../home/bottom.jsp"/>
 <script>
-$('#update_btn').click(function(){
+$('#update_btn').click(()=>{
 	location.assign('${ctx}/customer.do?cmd=cust_retrieve&page=update&customer_id=${cust.customerId}');
 });
 
-$('#file_upload_btn').click(function(){
+$('#file_upload_btn').click(()=>{
 	$('#file_form')
 	.attr('method','post')
 	.attr('action','${ctx}/customer.do?cmd=cust_file_upload&page=detail&customer_id=${cust.customerId}')
@@ -42,7 +42,7 @@ $('#file_upload_btn').click(function(){
 	.submit();
 });
 
-$('#delete_btn').click(function(){
+$('#delete_btn').click(()=>{
 	location.assign('${ctx}/customer.do?cmd=cust_delete&dir=home&page=main&customer_id=${cust.customerId}');
 });
 </script>
