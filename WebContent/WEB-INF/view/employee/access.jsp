@@ -21,7 +21,8 @@
 </form>
 </div>
 <jsp:include page="../home/bottom.jsp"/>
-<script>
+<script src="&{js}/employee.js">
+/* 
 $('#confirm_btn').click(()=>{
 	var empno = $('#empno').val();
 	var name = $('#name').val();
@@ -29,4 +30,5 @@ $('#confirm_btn').click(()=>{
 	.attr('action', '${ctx}/employee.do')
 	.submit();
 });
+*/
 </script>

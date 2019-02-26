@@ -43,7 +43,5 @@
 
 <jsp:include page="../home/bottom.jsp"/>  
 <script>
-$('#mypage a').click(()=>{
-	location.assign('${ctx}/customer.do?cmd=cust_retrieve&page=detail&customer_id=${customer.customerId}');
-})
+
 </script>
