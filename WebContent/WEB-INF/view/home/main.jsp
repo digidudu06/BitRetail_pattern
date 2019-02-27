@@ -41,6 +41,6 @@ $('#emp_access').click(()=>{
 });
 $('#oop_access').click(function(){
 /* 	encap.main();	 */
-	inherit.main();
+	test2.main();
 });
 </script>
