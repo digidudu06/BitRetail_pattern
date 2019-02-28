@@ -18,6 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
 	public List<CategoryDTO> bringCategoryLists(Proxy pxy) {
 		return dao.selectCategoryLists(pxy);
 	}
